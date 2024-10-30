@@ -54,6 +54,8 @@ SUBSYSTEMS=="usb", ATTRS{idProduct}=="1852", ATTRS{idVendor}=="1038", MODE="0666
 SUBSYSTEMS=="usb", ATTRS{idProduct}=="185C", ATTRS{idVendor}=="1038", MODE="0666"
 SUBSYSTEMS=="usb", ATTRS{idProduct}=="1860", ATTRS{idVendor}=="1038", MODE="0666"
 SUBSYSTEMS=="usb", ATTRS{idProduct}=="1854", ATTRS{idVendor}=="1038", MODE="0666"
+SUBSYSTEMS=="usb", ATTRS{idProduct}=="1838", ATTRS{idVendor}=="1038", MODE="0666"
+SUBSYSTEMS=="usb", ATTRS{idProduct}=="183a", ATTRS{idVendor}=="1038", MODE="0666"
 
 KERNEL=="hidraw*", ATTRS{idProduct}=="185E", ATTRS{idVendor}=="1038", MODE="0666"
 KERNEL=="hidraw*", ATTRS{idProduct}=="1862", ATTRS{idVendor}=="1038", MODE="0666"
@@ -61,6 +63,8 @@ KERNEL=="hidraw*", ATTRS{idProduct}=="1852", ATTRS{idVendor}=="1038", MODE="0666
 KERNEL=="hidraw*", ATTRS{idProduct}=="185C", ATTRS{idVendor}=="1038", MODE="0666"
 KERNEL=="hidraw*", ATTRS{idProduct}=="1860", ATTRS{idVendor}=="1038", MODE="0666"
 KERNEL=="hidraw*", ATTRS{idProduct}=="1854", ATTRS{idVendor}=="1038", MODE="0666"
+KERNEL=="hidraw*", ATTRS{idProduct}=="1838", ATTRS{idVendor}=="1038", MODE="0666"
+KERNEL=="hidraw*", ATTRS{idProduct}=="183a", ATTRS{idVendor}=="1038", MODE="0666"
 ```
 
 Once created, replug the wireless dongle.
