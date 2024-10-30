@@ -1,5 +1,5 @@
-# Aerox_5
-A CLI and tray application to monitor SteelSeries Aerox 5 Wireless battery level. 
+# Aerox_Battery
+A CLI and tray application to monitor SteelSeries Aerox 3/5 Wireless battery level. 
 
 <img src=./screenshots/tray_app.png alt="tray_app">
 <img src=./screenshots/notification.png alt="notification">
