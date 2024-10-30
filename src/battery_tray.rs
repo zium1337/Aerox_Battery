@@ -33,6 +33,7 @@ pub struct BatteryTray {
     battery_level: u8,
     charging: bool,
     status_message: Option<String>,
+    product_id: Option<u16>,
 }
 
 impl BatteryTray {
@@ -40,6 +41,7 @@ impl BatteryTray {
         BatteryTray {
             battery_level: 0,
             charging: false,
+            product_id: Some(0),
             status_message: Some("No device found".to_string()),
         }
     }
@@ -47,6 +49,7 @@ impl BatteryTray {
     pub fn update(&mut self, device: &Device) {
         self.battery_level = device.battery_level;
         self.charging = device.charging;
+        self.product_id = Some(device.product_id);
     }
 
     pub fn set_status(&mut self, message: &str) {
@@ -86,8 +89,12 @@ impl Tray for BatteryTray {
                 description
             },
         };
+        let summary_text = match self.product_id {
+            Some(0x1838) | Some(0x183A) => "SteelSeries Aerox 3 Wireless",
+            _ => "SteelSeries Aerox 5 Wireless",
+        };
         ToolTip {
-            title: "SteelSeries Aerox 5 Wireless".to_string(),
+            title: summary_text.to_string(),
             description: description,
             icon_name: "".into(),
             icon_pixmap: Vec::new(),

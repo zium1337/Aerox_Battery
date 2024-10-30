@@ -8,7 +8,7 @@ const VENDOR_IDS: [u16; 1] = [0x1038];
 //  SteelSeries Aerox 5 Wireless Destiny 2 Edition
 //  SteelSeries Aerox 5 Wireless Diablo IV Edition
 // in wired and wireless mode
-const PRODUCT_IDS: [u16; 6] = [0x1854, 0x185E, 0x1862, 0x1852, 0x185C, 0x1860];
+const PRODUCT_IDS: [u16; 8] = [0x1854, 0x185E, 0x1862, 0x1852, 0x185C, 0x1860, 0x1838, 0x183A];
 
 const INTERFACE_NUMBER: i32 = 3;
 
@@ -42,7 +42,8 @@ pub enum DeviceError {
 }
    
 pub struct Device {
-    hid_device: HidDevice,
+    pub hid_device: HidDevice,
+    pub product_id: u16,
     pub battery_level: u8,
     pub charging: bool,
 }
@@ -50,8 +51,10 @@ pub struct Device {
 impl Device {
     pub fn new() -> Result<Self, DeviceError> {
         let hid_api = HidApi::new()?;
+        let mut product_id = 0;
         let hid_device = hid_api.device_list().find_map(|info| {
             if PRODUCT_IDS.contains(&info.product_id()) && VENDOR_IDS.contains(&info.vendor_id()) && info.interface_number() == INTERFACE_NUMBER {
+                product_id = info.product_id();
                 Some(info.open_device(&hid_api))
             } else {
                 None
@@ -59,6 +62,7 @@ impl Device {
         }).ok_or(DeviceError::NoDeviceFound())??;
         Ok(Device { 
             hid_device,
+            product_id,
             charging: false,
             battery_level: 0,
          })

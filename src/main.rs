@@ -95,11 +95,16 @@ fn main() {
             },
         };
         if args.enable_notifications && !notification_blocked && battery_level <= args.lower_battery_level {
+            let summary_text = if [0x1838, 0x183A].contains(&device.product_id) {
+                "SteelSeries Aerox 3 Wireless"
+            } else {
+                "SteelSeries Aerox 5 Wireless"
+            };
             if let Err(error) = Notification::new()
-                .summary("SteelSeries Aerox 5 Wireless")
+                .summary(&&summary_text)
                 .body(&format!("Battery level low!\n{}% remaining", battery_level))
                 .icon("input-mouse")
-                .appname("Aerox 5")
+                .appname("Aerox Battery")
                 .timeout(args.notification_timeout as i32)
                 .show() {
                     eprintln!("{error}");
